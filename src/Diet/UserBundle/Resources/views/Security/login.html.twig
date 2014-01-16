@@ -1,0 +1,90 @@
+{% extends 'DietUserBundle::layout_default.html.twig' %}
+{% block content %}
+{# src/Acme/SecurityBundle/Resources/views/Security/login.html.twig #}
+{% if error %}
+    <div>{{ error.message }}</div>
+{% endif %}
+<div class="container">
+    <div class = "row">
+        <div class="col-md-8">
+            <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="1" class=""></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="2" class=""></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="3" class=""></li>
+                    <li data-target="#carousel-example-generic" data-slide-to="4" class=""></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="item active">
+                        <img class="img-responsive" alt="First slide" src="{{ asset('bundles/dietuser/img/toppage/1.jpg') }}">
+                    </div>
+                    <div class="item">
+                        <img class="img-responsive" alt="Second slide" src="{{ asset('bundles/dietuser/img/toppage/2.jpg') }}">
+                    </div>
+                    <div class="item">
+                        <img class="img-responsive" alt="Third slide" src="{{ asset('bundles/dietuser/img/toppage/3.jpg') }}">
+                    </div>
+                    <div class="item">
+                        <img class="img-responsive" alt="Forth slide" src="{{ asset('bundles/dietuser/img/toppage/4.jpg') }}">
+                    </div>
+                    <div class="item">
+                        <img class="img-responsive" alt="Fifth slide" src="{{ asset('bundles/dietuser/img/toppage/5.jpg') }}">
+                    </div>
+                </div><!-- carousel-inner -->
+                <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left"></span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right"></span>
+                </a>
+            </div><!-- carousel-slide -->
+        </div><!-- col-md-8 -->
+        <div class="col-md-4">
+            <div class="container-fluid">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a href="#login" data-toggle="tab">login</a></li>
+                    <li><a href="#regist" data-toggle="tab">regist</a></li>
+                </ul>
+                <div id="myTabContent" class="tab-content" style="margin-top: 10px">
+                    <div class="tab-pane fade in active" id="login">
+                        <form action="{{ path('diet_user_login_check') }}" method="post" role="form">
+                            <div class="form-group">
+                                <label for="username">E-mail</label><br>
+                                <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" />
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label><br>
+                                <input class="form-control" type="password" id="password" name="_password" />
+                            </div>
+                            {#
+                                If you want to control the URL the user
+                                is redirected to on success (more details below)
+                                <input type="hidden" name="_target_path" value="/account" />
+                            #}
+                            <div class="checkbox">
+                                <label for="remember_me">
+                                    <input type="checkbox" id="remember_me" name="_remember_me" checked />Keep me logged in
+                                </label>
+                            </div><!-- checkbox -->
+                        
+                            <button class="btn btn-primary" type="submit">login</button>
+                        </form>
+                    </div><!-- tab-pane -->
+                    <div class="tab-pane fade" id="regist">
+                        <form method="post" action="{{ path('diet_user_regist') }}">
+                        {% form_theme formViews['machine'] 'DietCoreBundle:Form:vertical.html.twig' %}
+                        {% form_theme formViews['weight'] 'DietCoreBundle:Form:vertical.html.twig' %}
+                        {{ form_row(formViews['machine'].machineid)}}
+                        {{ form_row(formViews['weight'].email) }}
+                        {{ form_row(formViews['weight'].password) }}
+                        <button class="btn btn-primary">登録</button>
+                        </form>
+                    </div>
+                </div>
+            </div><!-- container -->
+         </div>
+     </div><!-- row -->
+</div><!--container-->
+
+{% endblock %}

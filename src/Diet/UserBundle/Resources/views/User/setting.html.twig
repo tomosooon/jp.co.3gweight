@@ -1,0 +1,34 @@
+{% extends 'DietUserBundle::layout_default.html.twig' %}
+{% form_theme form 'DietCoreBundle:Form:vertical.html.twig' %}
+{% block content %}
+    <div class="container">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#regist" data-toggle="tab">新しいユーザーを登録する。</a></li>
+            {% for user in users %}
+            <li><a href="#{{ user.id }}" data-toggle="tab">{{ user.firstName }}</a></li>
+            {% endfor %}
+        </ul>
+        <div id="myTabContent" class="tab-content" style="margin-top: 10px">
+            <div class="tab-pane fade in active" id="regist">
+                {% include 'DietUserBundle:User:_registForm.html.twig' %}
+            </div>
+            {% for user in users %}
+            {% form_theme formViews[user.id] 'DietCoreBundle:Form:vertical.html.twig' %}
+            <div class="tab-pane fade" id="{{ user.id }}">
+                <form method="post" action="{{ path('diet_user_setting') }}">
+                {{ form_row(formViews[user.id].firstName)}}
+                {{ form_row(formViews[user.id].lastName)}}
+                {{ form_row(formViews[user.id].email)}}
+                {{ form_row(formViews[user.id].birthday)}}
+                {{ form_row(formViews[user.id].height)}}
+                <div class="btn-group">
+                    <button class="btn btn-primary" style="text-align: right">適用</button>
+                    <a href="{{ path('diet_user_setting_delete', {id : user.id}) }}" title="Delete" class="btn btn-danger">Delete</a>
+                </div><!-- btn-group -->
+                </form>
+            </div><!-- tab-pane -->
+            {% endfor %}
+        </div>
+    </div><!-- container -->
+
+{% endblock %}

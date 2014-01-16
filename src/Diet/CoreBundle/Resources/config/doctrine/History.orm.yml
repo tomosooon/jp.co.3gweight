@@ -1,0 +1,20 @@
+Diet\CoreBundle\Entity\History:
+    type: entity
+    table: null
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        weight:
+            type: float
+            
+        messureAt:
+            type: datetime
+    lifecycleCallbacks:
+        prePersist: [prePersist]
+    manyToOne:
+        user:
+            targetEntity: User
+            inversedBy: histories

@@ -1,0 +1,39 @@
+{% extends 'DietAdminBundle::layout.html.twig' %}
+{% block header %}
+    <header>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                    <div>
+                        <a href="{{ path('diet_admin_index') }}"><img src="{{ asset('bundles/dietadmin/img/blog.jpeg') }}" height="128"></a>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9" style="text-align: right;">
+                    <div>
+                        <br>
+                        <a href="{{ path('diet_user_home') }}">front</a>
+                        <a href="{{ path('diet_admin_weightMachine') }}">regist_machine</a>  
+                        <a href="{{ path('diet_admin_register') }}">regist_admin</a>
+                        <a href="{{path('diet_admin_logout')}}">logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="alert">
+            <div class="container">
+                {% for alert in app.session.flashbag.get('warning') %}
+                    <div class="alert alert-warning">
+                        <a class="close" data-dismiss="alert" href="#">×</a>
+                        {{ alert|raw }}
+                    </div><!-- alert -->
+                {% endfor %}
+                {% for alert in app.session.flashbag.get('success') %}
+                    <div class="alert alert-success">
+                        <a class="close" data-dismiss="alert" href="#">×</a>
+                        {{ alert|raw }}
+                    </div><!-- alert -->
+                {% endfor %}
+            </div><!-- container -->
+        </div><!-- alert -->
+    </header>
+{% endblock %}

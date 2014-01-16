@@ -1,0 +1,89 @@
+{% extends 'DietUserBundle::layout_default.html.twig' %}
+{% block content %}
+{#}    {% for user in users %}
+        <div class="container">
+            <div id="line{{ user.id }}">
+            </div><!-- line -->
+        </div><!-- container -->
+    {% endfor %}#}
+    <div class="container">
+        <ul class="nav nav-tabs">
+        {% set first = 1 %}
+        {% for user in users %}
+            <li {% if first == 1 %}class="active"{% set first = 0 %}{% endif %}><a href="#{{ user.firstName }}" data-toggle="tab">{{ user.firstName }}</a></li>
+        {% endfor %}
+        </ul>
+        <div id="myTabContent" class="tab-content">
+        {% set first = 1 %}
+        {% for user in users %}
+            <div class="tab-pane fade {% if first == 1 %}in active{% set first = 0 %}{% endif %}" id="{{ user.firstName }}">
+                <div id="line{{ user.id }}">
+                </div><!-- line -->
+            </div>
+        {% endfor %}
+        </div>
+    </div><!-- container -->
+{% endblock %}
+
+{% block javascript %}
+
+    <script type="text/javascript">
+        $(function() {
+            $('span[data-toggle=tooltip]').tooltip();
+        });
+    </script>
+
+{% for user in users %}
+{% set month = 0 %}
+    <script type="text/javascript">
+    var line{{ user.id }} = new String();
+    line{{ user.id }} += '#line';
+    line{{ user.id }} += {{ user.id }};
+    $(function () {
+        $(line{{ user.id }}).highcharts({
+            chart: {
+                type: 'line',
+                marginRight: 130,
+                marginBottom: 25
+            },
+            title: {
+                text: '体重推移',
+                x:-20 //center
+            },
+            xAxis: {
+                categories: [{% for history in histories[user.id] %}'{% if month == history.messureAt|date("m") %}{{ history.messureAt|date("d") }}{% else %}{% set month = history.messureAt|date("m") %}{{ history.messureAt|date("m/d") }}{% endif %}', {% endfor %}]
+            },
+            yAxis: {
+                title: {
+                    text: '体重(kg)',
+                    align: 'middle',
+                    rotation: -90
+ 
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                valueSuffix: 'kg'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -80,
+                y: 0,
+                borderWidth: 0
+            },
+            series: [{
+                name: '{{ user.firstName }}',
+                data: [{% for history in histories[user.id] %}{{ history.weight }}, {% endfor %}]
+            }]
+        });
+    });    </script>
+    {% endfor %}
+    
+    
+{% endblock %}

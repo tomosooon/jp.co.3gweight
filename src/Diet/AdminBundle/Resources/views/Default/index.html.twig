@@ -1,0 +1,10 @@
+{% extends 'DietAdminBundle::layout_default.html.twig' %}
+
+
+{% block javascript %}
+    <script type="text/javascript">
+        $(function() {
+            $('span[data-toggle=tooltip]').tooltip();
+        });
+    </script>
+{% endblock %}

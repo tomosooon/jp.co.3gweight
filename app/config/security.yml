@@ -1,0 +1,75 @@
+security:
+    firewalls:
+          admin_login_firewall:
+            pattern:    ^/admin/login$
+            anonymous:  true
+            security: false
+          user_login_firewall:
+            pattern:    ^/login$
+            anonymous: true
+            security: false
+          user_regist_firewall:
+            pattern:    ^/regist$
+            anonymous: true
+            security: false
+#          install_firewall:
+#            pattern:    ^/admin/install
+#            security:   false
+          admin_secured_area:
+            pattern:    ^/admin
+            anonymous: true
+            form_login:
+                login_path:           /admin/login
+                check_path:           /admin/login_check
+                default_target_path:  /admin
+                provider:             administrator
+            logout:
+                path:   /admin/logout
+                target: /admin/login
+            remember_me:
+                key:      "%secret%"
+                lifetime: 259200 # 30 days in seconds
+                path:     /admin
+                domain:   ~ # Defaults to the current domain from $_SERVER
+                
+          secured_area:
+            pattern:    ^/
+            anonymous: true
+            form_login:
+                login_path:           /login
+                check_path:           /login_check
+                default_target_path:  /home
+                provider:             customer
+            logout:
+                path:   /logout
+                target: /login
+            remember_me:
+                key:      "%secret%"
+                lifetime: 259200 # 30 days in seconds
+                path:     /
+                domain:   ~ # Defaults to the current domain from $_SERVER
+
+
+    access_control:
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/ , roles: ROLE_USER }
+    providers:
+        administrator:
+            entity: { class: "DietCoreBundle:Admin", property: username }
+        customer:
+            entity: { class: "DietCoreBundle:Weight", property: email }
+
+    encoders:
+        Diet\CoreBundle\Entity\Admin:
+            algorithm:        sha1
+            encode_as_base64: false
+            iterations:       1
+        Diet\CoreBundle\Entity\Weight:
+            algorithm:        sha1
+            encode_as_base64: false
+            iterations:       1
+            
+    role_hierarchy:
+        ROLE_ADMIN:       ROLE_USER
+        ROLE_SUPER_ADMIN: [ ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
+

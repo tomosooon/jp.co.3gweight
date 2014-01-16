@@ -1,0 +1,21 @@
+Diet\CoreBundle\Entity\WeightMachine:
+    type: entity
+    table: null
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        machineid:
+            type: string
+            length: 16
+            unique: true
+    lifecycleCallbacks: {  }
+
+    oneToOne:
+        weightuser:
+            targetEntity: Weight
+            joinColumn:
+                name: weightuser
+                referencedColumnName: id

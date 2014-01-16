@@ -1,0 +1,14 @@
+Diet\CoreBundle\Entity\WeightMachine:
+    properties:
+        machineid:
+            - Length:
+                min: 16
+                max: 16
+                exactMessage: "weightid should have exactly 16 characters."
+
+Diet\CoreBundle\Entity\Weight:
+    properties:
+        password:
+            - Length:
+                min: 8
+                max: 32

@@ -1,0 +1,26 @@
+diet_admin_index:
+    pattern:  /
+    defaults: { _controller: "DietAdminBundle:Default:index" }
+
+diet_admin_install:
+    pattern:  /install
+    defaults: { _controller: "DietAdminBundle:Admin:install" }
+
+diet_admin_login:
+    pattern:  /login
+    defaults: { _controller: "DietAdminBundle:Security:login" }
+
+diet_admin_logout:
+    pattern:  /logout
+
+diet_admin_login_check:
+    pattern:  /login_check
+
+diet_admin_register:
+    pattern:  /register
+    defaults: { _controller: "DietAdminBundle:Admin:register" }
+
+diet_admin_weightMachine:
+    pattern:  /weightMachine
+    defaults: { _controller: "DietAdminBundle:WeightMachine:weightMachine" }
+    

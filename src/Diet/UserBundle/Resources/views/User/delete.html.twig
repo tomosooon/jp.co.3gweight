@@ -1,0 +1,14 @@
+{% extends 'DietUserBundle::layout_default.html.twig' %}
+{% block content %}
+<div class='container'>
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+
+    <div class="panel panel-warning">
+        <div class="panel-heading"><span class="glyphicon glyphicon-warning-sign"></span> 「{{ user.firstName }} {{ user.lastName }}」を削除してもよろしいですか？</div>
+        <div class="panel-body">{{ form_widget(form.submit) }}</div>
+    </div><!-- panel -->
+
+    {{ form_end(form) }}
+</div><!--container-->
+{% endblock %}

@@ -1,0 +1,3 @@
+diet_core_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: DietCoreBundle:Default:index }

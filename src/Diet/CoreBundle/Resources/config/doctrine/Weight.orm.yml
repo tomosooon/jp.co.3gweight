@@ -1,0 +1,35 @@
+Diet\CoreBundle\Entity\Weight:
+    type: entity
+    table: null
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        email:
+            type: string
+            length: 64
+            unique: true
+        salt:
+            type: string
+            length: 64
+        password:
+            type: string
+            length: 60
+        isActive:
+            name: is_active
+            type: boolean
+
+    lifecycleCallbacks: {  }
+
+    oneToOne:
+        weightmachine:
+            targetEntity: WeightMachine
+            joinColumn:
+                name: machineid
+                referencedColumnName: id
+    oneToMany:
+        users:
+            targetEntity: User
+            mappedBy: weight

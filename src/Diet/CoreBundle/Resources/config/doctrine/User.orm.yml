@@ -1,0 +1,41 @@
+Diet\CoreBundle\Entity\User:
+    type: entity
+    table: null
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        firstName:
+            type: string
+            length: 64
+        lastName:
+            type: string
+            length: 64
+        email:
+            type: string
+            length: 64
+            unique: true
+        height:
+            type: float
+        birthday:
+            type: date
+        createdAt:
+            type: datetime
+        updatedAt:
+            type: datetime
+    lifecycleCallbacks:
+        prePersist: [prePersist]
+        preUpdate: [preUpdate]
+    manyToOne:
+        weight:
+            targetEntity: Weight
+            inversedBy: users
+    oneToMany:
+        histories:
+            targetEntity: History
+            mappedBy: user
+        targets:
+            targetEntity: Target
+            mappedBy: user

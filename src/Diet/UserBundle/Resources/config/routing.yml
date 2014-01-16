@@ -1,0 +1,33 @@
+diet_user_index:
+    pattern:  /
+    defaults: { _controller: "DietUserBundle:Default:index" }
+
+diet_user_home:
+    pattern:  /home
+    defaults:  { _controller: "DietUserBundle:Default:home" }
+    
+diet_user_setting:
+    pattern:  /setting
+    defaults:  { _controller: "DietUserBundle:User:setting" }
+
+diet_user_setting_delete:
+    pattern:  /setting/{id}/delete
+    defaults:  { _controller: "DietUserBundle:User:delete" }
+
+diet_user_history:
+    pattern:  /history
+    defaults:  { _controller: "DietUserBundle:History:history" }
+
+diet_user_login:
+    pattern:   /login
+    defaults:  { _controller: "DietUserBundle:Security:login" }
+
+diet_user_regist:
+    pattern:   /regist
+    defaults:  { _controller: "DietUserBundle:Security:regist" }
+
+diet_user_login_check:
+    pattern:   /login_check
+
+diet_user_logout:
+    pattern:   /logout

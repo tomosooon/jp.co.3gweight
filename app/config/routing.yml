@@ -1,0 +1,8 @@
+diet_user:
+    resource: "@DietUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+diet_admin:
+    resource: "@DietAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+

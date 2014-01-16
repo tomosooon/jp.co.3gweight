@@ -1,0 +1,378 @@
+<?php
+
+namespace Diet\CoreBundle\Entity;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * User
+ */
+class User
+{
+    /**
+     * @var integer
+     */
+    private $id;
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    /**
+     * @var string
+     */
+    private $firstName;
+
+    /**
+     * @var string
+     */
+    private $lastName;
+
+    /**
+     * @var string
+     */
+    private $email;
+
+    /**
+     * @var string
+     */
+    private $salt;
+
+    /**
+     * @var \DateTime
+     */
+    private $createdAt;
+
+    /**
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $histories;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->histories = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->targets = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Set firstName
+     *
+     * @param string $firstName
+     * @return User
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get firstName
+     *
+     * @return string 
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Set lastName
+     *
+     * @param string $lastName
+     * @return User
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * Get lastName
+     *
+     * @return string 
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     * @return User
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string 
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set salt
+     *
+     * @param string $salt
+     * @return User
+     */
+    public function setSalt($salt)
+    {
+        $this->salt = $salt;
+
+        return $this;
+    }
+
+    /**
+     * Get salt
+     *
+     * @return string 
+     */
+    public function getSalt()
+    {
+        return $this->salt;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     * @return User
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime 
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Set updatedAt
+     *
+     * @param \DateTime $updatedAt
+     * @return User
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    /**
+     * Get updatedAt
+     *
+     * @return \DateTime 
+     */
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * Add histories
+     *
+     * @param \Diet\CoreBundle\Entity\History $histories
+     * @return User
+     */
+    public function addHistorie(\Diet\CoreBundle\Entity\History $histories)
+    {
+        $this->histories[] = $histories;
+
+        return $this;
+    }
+
+    /**
+     * Remove histories
+     *
+     * @param \Diet\CoreBundle\Entity\History $histories
+     */
+    public function removeHistorie(\Diet\CoreBundle\Entity\History $histories)
+    {
+        $this->histories->removeElement($histories);
+    }
+
+    /**
+     * Get histories
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getHistories()
+    {
+        return $this->histories;
+    }
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist()
+    {
+        $now = new \DateTime();
+
+        $this->createdAt = $now;
+        $this->updatedAt = $now;
+    }
+
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate()
+    {
+        $this->updatedAt = new \DateTime();
+        // Add your code here
+    }
+    /**
+     * @var \Diet\CoreBundle\Entity\Weight
+     */
+    private $weight;
+
+    /**
+     * Set weight
+     *
+     * @param \Diet\CoreBundle\Entity\Weight $weight
+     * @return User
+     */
+    public function setWeight(\Diet\CoreBundle\Entity\Weight $weight = null)
+    {
+        $this->weight = $weight;
+
+        return $this;
+    }
+
+    /**
+     * Get weight
+     *
+     * @return \Diet\CoreBundle\Entity\Weight 
+     */
+    public function getWeight()
+    {
+        return $this->weight;
+    }
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $targets;
+
+    /**
+     * Add targets
+     *
+     * @param \Diet\CoreBundle\Entity\Target $targets
+     * @return User
+     */
+    public function addTarget(\Diet\CoreBundle\Entity\Target $targets)
+    {
+        $this->targets[] = $targets;
+
+        return $this;
+    }
+
+    /**
+     * Remove targets
+     *
+     * @param \Diet\CoreBundle\Entity\Target $targets
+     */
+    public function removeTarget(\Diet\CoreBundle\Entity\Target $targets)
+    {
+        $this->targets->removeElement($targets);
+    }
+
+    /**
+     * Get targets
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTargets()
+    {
+        return $this->targets;
+    }
+    /**
+     * @var float
+     */
+    private $height;
+
+    /**
+     * @var \DateTime
+     */
+    private $birthday;
+
+
+    /**
+     * Set height
+     *
+     * @param float $height
+     * @return User
+     */
+    public function setHeight($height)
+    {
+        $this->height = $height;
+    
+        return $this;
+    }
+
+    /**
+     * Get height
+     *
+     * @return float 
+     */
+    public function getHeight()
+    {
+        return $this->height;
+    }
+
+    /**
+     * Set birthday
+     *
+     * @param \DateTime $birthday
+     * @return User
+     */
+    public function setBirthday($birthday)
+    {
+        $this->birthday = $birthday;
+    
+        return $this;
+    }
+
+    /**
+     * Get birthday
+     *
+     * @return \DateTime 
+     */
+    public function getBirthday()
+    {
+        return $this->birthday;
+    }
+}

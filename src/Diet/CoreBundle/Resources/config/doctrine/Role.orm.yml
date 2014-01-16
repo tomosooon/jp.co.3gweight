@@ -1,0 +1,19 @@
+Diet\CoreBundle\Entity\Role:
+    type: entity
+    table: null
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        name:
+            type: string
+            length: 255
+            unique: true
+    manyToMany:
+        roleAdmins:
+            targetEntity: Admin
+            mappedBy: adminRoles
+
+    lifecycleCallbacks: {  }

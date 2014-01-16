@@ -1,0 +1,36 @@
+{% extends 'DietAdminBundle::layout_default.html.twig' %}
+{% block content %}
+{# src/Acme/SecurityBundle/Resources/views/Security/login.html.twig #}
+{% if error %}
+    <div>{{ error.message }}</div>
+{% endif %}
+<div class="container">
+    <div class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+        <div class="well">
+            <form action="{{ path('diet_admin_login_check') }}" method="post" role="form">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="_password" />
+                </div>
+                {#
+                    If you want to control the URL the user
+                    is redirected to on success (more details below)
+                    <input type="hidden" name="_target_path" value="/account" />
+                #}
+                <div class="checkbox">
+                    <label for="remember_me">
+                        <input type="checkbox" id="remember_me" name="_remember_me" checked />Keep me logged in
+                    </label>
+                </div><!-- checkbox -->
+            
+                <button type="submit">login</button>
+            </form>
+        </div><!-- well -->
+    </div>
+</div><!-- container -->
+
+{% endblock %}

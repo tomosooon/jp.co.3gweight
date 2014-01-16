@@ -1,0 +1,40 @@
+Diet\CoreBundle\Entity\Admin:
+    type: entity
+    table: null
+    fields:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+        username:
+            type: string
+            length: 32
+            unique: true
+        email:
+            type: string
+            length: 64
+        salt:
+            type: string
+            length: 64
+        password:
+            type: string
+            length: 60
+        isActive:
+            name: is_active
+            type: boolean
+            
+    manyToMany:
+        adminRoles:
+            targetEntity: Role
+            inversedBy: roleAdmins
+            joinTable:
+                name: AdminRole
+                joinColumns:
+                    adminId:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    roleId:
+                        referencedColumnName: id
+                  
+    lifecycleCallbacks: {  }

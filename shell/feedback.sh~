@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# Variables
+project=jp.co.3gdiet.dev
+from=/usr/local/rms/evt/${project}/
+to=/mnt/workspace/${project}/
+
+# Commnads
+rsync -avzln --delete --exclude /bootstrap.php.cache --exclude /cache --exclude /logs --exclude /pear ${from}app/    ${to}app/
+rsync -avzln --delete --exclude '*.compressed.css' --exclude '*.compressed.js'                        ${from}src/    ${to}src/
+rsync -avzln --delete --exclude /bundles --exclude /assets  --exclude /uploads                        ${from}web/    ${to}web/
+rsync -avzln --delete                                                                                 ${from}vendor/ ${to}vendor/
+
+echo "-------------------------------------------" 
+echo "Are you sure rsync? [Press y(Yes) or N(No)]" 
+echo -n " => " 
+read ans
+echo "-------------------------------------------" 
+case ${ans} in
+  y)
+    continue ;;
+  *)
+    echo "Canceled." 
+    exit 0;;
+esac
+
+rsync -avzl --delete --exclude /bootstrap.php.cache --exclude /cache --exclude /logs --exclude /pear ${from}app/ ${to}app/
+rsync -avzl --delete --exclude '*.compressed.css' --exclude '*.compressed.js'                        ${from}src/ ${to}src/
+rsync -avzl --delete --exclude /bundles --exclude /assets --exclude /uploads                         ${from}web/ ${to}web/
+rsync -avzl --delete                                                                                 ${from}vendor/ ${to}vendor/
