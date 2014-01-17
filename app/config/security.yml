@@ -13,7 +13,7 @@ security:
             anonymous: true
             security: false
           user_history_regist_firewall:
-            pattern:    ^/history/regist$
+            pattern:    ^/history/regist
             anonymous: true
             security: false
 #          install_firewall:

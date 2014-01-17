@@ -30,6 +30,10 @@ diet_user_history_regist:
     pattern:   /history/regist
     defaults:  { _controller: "DietUserBundle:History:regist"}
 
+diet_user_history_regist_form:
+    pattern:   /history/regist/form
+    defaults:  { _controller: "DietUserBundle:History:form"}
+
 diet_user_login_check:
     pattern:   /login_check
 

@@ -1,1 +1,14 @@
-yes this is history
+sended\n
+{% if error %}
+{{ error }}
+{% elseif posts %}
+{% for postTitle in postTitles %}
+
+{{ postTitle }} = {{ posts[postTitle] }}\n
+
+post success!
+
+{% endfor %}
+{% else %}
+without post method
+{% endif %}

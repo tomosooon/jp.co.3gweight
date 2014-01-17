@@ -1,0 +1,21 @@
+{% extends 'DietUserBundle::layout_default.html.twig' %}
+{% block content %}
+<div class="container">
+    <form class="form-inline" action="{{ path('diet_user_history_regist') }}" method="post" role="form">
+        <div class="form-group">
+            <label class="sr-only" for="exampleInputEmail2">input your weight</label>
+            <input name="post_1" type="text" class="form-control" id="exampleInputEmail2" placeholder="your weight">
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="exampleInput">input your weight</label>
+            <input name="post_2" type="text" class="form-control" id="exampleInput" placeholder="your userid">
+        </div>
+        <div class="form-group">
+            <label class="sr-only" for="example">input your weight</label>
+            <input name="machine_id" type="text" class="form-control" id="example" placeholder="your machine_code">
+        </div>
+        <button type="submit" class="btn btn-default">submit</button>
+    </form>
+</div>
+
+{% endblock %}
