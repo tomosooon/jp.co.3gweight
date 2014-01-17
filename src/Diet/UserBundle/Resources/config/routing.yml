@@ -26,6 +26,10 @@ diet_user_regist:
     pattern:   /regist
     defaults:  { _controller: "DietUserBundle:Security:regist" }
 
+diet_user_history_regist:
+    pattern:   /history/regist
+    defaults:  { _controller: "DietUserBundle:History:regist"}
+
 diet_user_login_check:
     pattern:   /login_check
 
