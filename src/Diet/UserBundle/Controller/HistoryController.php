@@ -35,33 +35,50 @@ class HistoryController extends Controller
             $machine = $em->getRepository('DietCoreBundle:WeightMachine')->findOneBy(array(
                     'machineid' => $posts['machine_id'],
             ));
+            /*
+                        if(!is_float($posts['post_1'])){
+                            $error = $error . "your weight is not good type\n";
+                        }
+             */
+            if ((int)($posts['post_1'] * 100) % 10 >= 5) {
+                $weight = (int)($posts['post_1']*10)/10.0+0.1;
+            } else {
+                $weight = (int)($posts['post_1']*10)/10.0;
+            }
 
             if (!$machine) {
-                $error = $error . "no machine";
+                $error = $error . "no machine\n";
             }
 
             $user = $em->getRepository('DietCoreBundle:User')->findOneById($posts['post_2']);
             if (!$user) {
-                $error = $error . "no user";
+                $error = $error . "no user\n";
             }
 
-            if (!$error) {
-                $newhistory = new History();
-                $newhistory->setWeight($posts['post_1']);
-                $newhistory->setUser($user);
-
-                $em->persist($newhistory);
-                $em->flush();
+            if ($error) {
+                $this->get('session')->getFlashBag()->add('success', $error);
+                return $this->redirect($this->generateUrl('diet_user_history_regist_form'));
             }
+
+            $newhistory = new History();
+            $newhistory->setWeight($weight);
+            $newhistory->setUser($user);
+
+            $em->persist($newhistory);
+            $em->flush();
         }
-        return $this->render('DietUserBundle:History:history.html.twig', array(
+        return $this->render('DietUserBundle:History:regist_confirm.html.twig', array(
                 'postTitles' => $postTitles,
                 'posts' => $posts,
-                'error' => $error,
         ));
     }
     public function formAction(Request $request)
     {
         return $this->render('DietUserBundle:History:form.html.twig');
+    }
+
+    public function historyAction(Request $request)
+    {
+        return $this->render('DietUserBundle:History:history.html.twig');
     }
 }

@@ -1,0 +1,9 @@
+sent<br>
+{% if posts %}
+{% for postTitle in postTitles %}
+{{ postTitle }} = {{ posts[postTitle] }}<br>
+{% endfor %}
+post success!
+{% else %}
+without post method
+{% endif %}
