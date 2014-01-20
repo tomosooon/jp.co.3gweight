@@ -7096,3 +7096,6 @@ td.visible-print {
     display: none !important;
   }
 }
+img.img-responsive {
+    display: inline-block;
+}
